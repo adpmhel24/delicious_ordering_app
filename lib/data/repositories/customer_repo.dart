@@ -1,0 +1,67 @@
+import 'package:delicious_ordering/data/models/models.dart';
+import 'package:delicious_ordering/data/repositories/repositories.dart';
+import 'package:delicious_ordering/data/services/apis.dart';
+import 'package:dio/dio.dart';
+
+class CustomerRepo {
+  List<CustomerModel> _customers = [];
+
+  CustomerAPI _customerAPI = CustomerAPI();
+  String _token = AuthRepository().currentUser.token;
+  int? custType;
+
+  Future<void> fetchCustomerFromAPI({Map<String, dynamic>? params}) async {
+    Response response;
+    try {
+      response = await _customerAPI.getAllCustomer(
+        token: _token,
+        params: params,
+      );
+      if (response.statusCode == 200) {
+        _customers = List<CustomerModel>.from(
+            response.data['data'].map((i) => CustomerModel.fromJson(i)));
+      }
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<String> addNewCustomer(Map<String, dynamic> data) async {
+    Response response;
+    String message = 'Unknown Error';
+    try {
+      response = await _customerAPI.addNewCustomer(token: _token, data: data);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        _customers.add(CustomerModel.fromJson(response.data['data']));
+        return response.data['message'];
+      }
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+    return message;
+  }
+
+  List<CustomerModel> getSuggestions(String name) {
+    if (custType == null) {
+      return _customers
+          .where((e) => e.name.toLowerCase().contains(name.toLowerCase()))
+          .toList();
+    }
+    return _customers
+        .where((e) =>
+            e.name.toLowerCase().contains(name.toLowerCase()) &&
+            e.custType == custType)
+        .toList();
+  }
+
+  List<CustomerModel> get customers => [..._customers];
+
+  ///Singleton factory
+  static final CustomerRepo _instance = CustomerRepo._internal();
+
+  factory CustomerRepo() {
+    return _instance;
+  }
+
+  CustomerRepo._internal();
+}
