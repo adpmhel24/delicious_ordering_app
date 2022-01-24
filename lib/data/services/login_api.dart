@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dio_setting.dart';
 
 class LoginAPI {
-  Dio dio = DioSettings().dio;
+  // Dio dio = DioSettings().dio;
 
 // Login Request
   Future<Response> loggedIn({
@@ -11,6 +12,8 @@ class LoginAPI {
     required password,
   }) async {
     Response response;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
 
     try {
       response = await dio.get('/api/auth/login',

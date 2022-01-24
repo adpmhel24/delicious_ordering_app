@@ -1,12 +1,13 @@
 import 'package:delicious_ordering/data/services/dio_setting.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerAPI {
-  Dio dio = DioSettings().dio;
-
   Future<Response> getAllCustomer(
       {required String token, Map<String, dynamic>? params}) async {
     Response response;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
     try {
       response = await dio.get('/api/customer/get_all',
           queryParameters: params,
@@ -21,6 +22,8 @@ class CustomerAPI {
 
   Future<Response> getAllCustomerType({required String token}) async {
     Response response;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
     try {
       response = await dio.get(
         '/api/custtype/get_all',
@@ -39,6 +42,8 @@ class CustomerAPI {
   Future<Response> addNewCustomer(
       {required String token, required Map<String, dynamic> data}) async {
     Response response;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
     try {
       response = await dio.post('/api/customer/new',
           data: data,

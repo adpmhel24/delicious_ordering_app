@@ -1,10 +1,13 @@
 import 'package:delicious_ordering/data/services/dio_setting.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DiscountTypeAPI {
-  Dio dio = DioSettings().dio;
+  // Dio dio = DioSettings().dio;
 
   Future<Response> getAllDiscType({required String token}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
     Response response;
     try {
       response = await dio.get(

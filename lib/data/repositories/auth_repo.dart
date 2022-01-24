@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:delicious_ordering/data/models/auth_user/user_model.dart';
 import 'package:delicious_ordering/data/services/apis.dart';
 import 'package:dio/dio.dart';
@@ -16,6 +19,8 @@ class AuthRepository {
           await _loginAPI.loggedIn(username: username, password: password);
       if (response.statusCode == 200) {
         _currentUser = UserModel.fromJson(response.data['data']);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString("userData", json.encode(_currentUser!.toJson()));
       } else {
         throw Exception(response.data['message']);
       }
@@ -27,7 +32,9 @@ class AuthRepository {
   bool isLoggedIn() => _currentUser != null;
 
   Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     await Future.delayed(const Duration(milliseconds: 500));
+    prefs.remove("userData");
     _currentUser = null;
   }
 

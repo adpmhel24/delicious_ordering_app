@@ -14,7 +14,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       FetchForConfirmOrders event, Emitter<OrdersState> emit) async {
     emit(LoadingOrdersForConfirm());
     try {
-      await _orderRepo.fetchAllOrdersByUser(params: {"delivery_status": 0});
+      await _orderRepo.fetchAllOrdersByUser(params: {"order_status": 0});
       emit(LoadedOrdersForConfirm(_orderRepo.orders));
     } on Exception catch (e) {
       emit(OrdersErrorState(e.toString()));
@@ -25,7 +25,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       FetchForDeliveryOrders event, Emitter<OrdersState> emit) async {
     emit(LoadingOrdersForDelivery());
     try {
-      await _orderRepo.fetchAllOrdersByUser(params: {"delivery_status": 1});
+      await _orderRepo.fetchAllOrdersByUser(params: {"order_status": 1});
       emit(LoadedOrdersForDelivery(_orderRepo.orders));
     } on Exception catch (e) {
       emit(OrdersErrorState(e.toString()));
@@ -36,7 +36,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       FetchCompletedOrders event, Emitter<OrdersState> emit) async {
     emit(LoadingOrdersCompeted());
     try {
-      await _orderRepo.fetchAllOrdersByUser(params: {"delivery_status": 3});
+      await _orderRepo.fetchAllOrdersByUser(params: {"order_status": 3});
       emit(LoadedOrdersCompleted(_orderRepo.orders));
     } on Exception catch (e) {
       emit(OrdersErrorState(e.toString()));

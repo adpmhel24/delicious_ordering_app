@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dio_setting.dart';
 
 class SalesTypeAPI {
-  Dio dio = DioSettings().dio;
+  // Dio dio = DioSettings().dio;
 
   Future<Response> getAllSalesType({required String token}) async {
     Response response;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
     try {
       response = await dio.get('/api/sales/type/get_all',
           options: Options(headers: {

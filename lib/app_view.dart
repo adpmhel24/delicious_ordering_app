@@ -107,29 +107,31 @@ class _AppViewState extends State<AppView> {
       routes: AppPages.appPages,
       initialRoute: LoginPage.routeName,
       builder: (_, child) {
-        return Builder(builder: (_) {
-          return BlocListener<AuthBloc, AuthState>(
-            listener: (_, authState) async {
-              if (authState is Authenticated) {
-                context.read<CustomerBloc>()..add(FetchCustomerFromAPI());
-                context.read<CustTypeBloc>()..add(FetchCustTypeFromAPI());
-                context.read<ProductsBloc>()..add(FetchProductFromAPI());
+        return Builder(
+          builder: (_) {
+            return BlocListener<AuthBloc, AuthState>(
+              listener: (_, authState) async {
+                if (authState is Authenticated) {
+                  context.read<CustomerBloc>()..add(FetchCustomerFromAPI());
+                  context.read<CustTypeBloc>()..add(FetchCustTypeFromAPI());
+                  context.read<ProductsBloc>()..add(FetchProductFromAPI());
 
-                _navigator.pushAndRemoveUntil<void>(
-                  OrderingHomePage.route(),
-                  (route) => false,
-                );
-                // await AppRepo.customerTypeRepository.fetchCustomerType();
-              } else {
-                _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
-                  (route) => false,
-                );
-              }
-            },
-            child: child,
-          );
-        });
+                  _navigator.pushAndRemoveUntil<void>(
+                    OrderingHomePage.route(),
+                    (route) => false,
+                  );
+                  // await AppRepo.customerTypeRepository.fetchCustomerType();
+                } else {
+                  _navigator.pushAndRemoveUntil<void>(
+                    LoginPage.route(),
+                    (route) => false,
+                  );
+                }
+              },
+              child: child,
+            );
+          },
+        );
       },
     );
   }

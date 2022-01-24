@@ -17,6 +17,7 @@ class CommonBloc {
   static final discTypeBloc = DiscTypeBloc();
   static final ordersBloc = OrdersBloc();
   static final custTypeBloc = CustTypeBloc();
+  // static final appInitBloc = AppInitBloc();
 
   static final List<BlocProvider> blocProviders = [
     BlocProvider<AuthBloc>(create: (context) => authBloc),
@@ -27,6 +28,8 @@ class CommonBloc {
     BlocProvider<DiscTypeBloc>(create: (context) => discTypeBloc),
     BlocProvider<OrdersBloc>(create: (context) => ordersBloc),
     BlocProvider<CustTypeBloc>(create: (context) => custTypeBloc),
+    // BlocProvider<AppInitBloc>(
+    //     create: (context) => appInitBloc..add(OpeningApp())),
   ];
 
   static void dispose() {
@@ -38,6 +41,7 @@ class CommonBloc {
     discTypeBloc.close();
     ordersBloc.close();
     custTypeBloc.close();
+    // appInitBloc.close();
   }
 
   /// Singleton factory
