@@ -57,6 +57,27 @@ class CustomerAPI {
     return response;
   }
 
+  Future<Response> updateCustomer({
+    required String token,
+    required String customerId,
+    required Map<String, dynamic> data,
+  }) async {
+    Response response;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Dio dio = DioSettings(prefs.getString("url")!).dio();
+    try {
+      response = await dio.put('/api/customer/update/$customerId',
+          data: data,
+          options: Options(headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json",
+          }));
+    } on DioError catch (e) {
+      throw Exception(e.response!.data['message']);
+    }
+    return response;
+  }
+
   ///Singleton factory
   static final CustomerAPI _instance = CustomerAPI._internal();
 

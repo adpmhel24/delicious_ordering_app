@@ -43,7 +43,7 @@ class CartPage extends StatelessWidget {
               onPressed: () {
                 customWarningDialog(
                   context: context,
-                  message: 'Are you sure you want to delete all?',
+                  message: 'Are you sure you want to remove all?',
                   onPositiveClick: () {
                     context.read<CartBloc>().add(ClearCart());
                     Navigator.of(context).pop();

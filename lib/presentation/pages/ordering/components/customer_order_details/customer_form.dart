@@ -34,21 +34,34 @@ class _CustomerOrderingDetailsFormState
 
   @override
   void initState() {
-    _custTypeController.text = (_checkOutRepo.checkoutData.custType == null)
-        ? ''
-        : _checkOutRepo.checkoutData.custType!;
+    _custTypeController.text = _checkOutRepo.checkoutData.custType ?? '';
 
-    _custCodeController.text = (_checkOutRepo.checkoutData.custCode == null)
-        ? ''
-        : _checkOutRepo.checkoutData.custCode!;
+    _custCodeController.text = _checkOutRepo.checkoutData.custCode ?? '';
 
     _contactNumberController.text =
-        (_checkOutRepo.checkoutData.contactNumber == null)
-            ? ''
-            : _checkOutRepo.checkoutData.contactNumber!;
-    _addressController.text = (_checkOutRepo.checkoutData.address == null)
-        ? ''
-        : _checkOutRepo.checkoutData.address!;
+        _checkOutRepo.checkoutData.contactNumber ?? '';
+
+    _addressController.text = _checkOutRepo.checkoutData.address ?? '';
+
+    if (_checkOutRepo.checkoutData.customerId != -1) {
+      context.read<OrderCustDetailsBloc>()
+        ..add(ChangeCustType(_custTypeController));
+
+      context.read<OrderCustDetailsBloc>()
+        ..add(
+          ChangeCustCode(
+            customerId: _checkOutRepo.checkoutData.customerId ?? -1,
+            custCode: _custCodeController,
+          ),
+        );
+
+      context.read<OrderCustDetailsBloc>()
+        ..add(ChangeContactNumber(_addressController));
+
+      context.read<OrderCustDetailsBloc>()
+        ..add(ChangeAddress(_addressController));
+    }
+
     super.initState();
   }
 
@@ -83,10 +96,14 @@ class _CustomerOrderingDetailsFormState
                 custNameController: _custCodeController,
                 contactNumberController: _contactNumberController,
                 addressController: _addressController,
-                custRepo: _custRepo,
+                customerRepo: _custRepo,
               ),
-              ContactNumberField(phoneNumController: _contactNumberController),
-              AddressField(addressController: _addressController),
+              ContactNumberField(
+                  customerRepo: _custRepo,
+                  phoneNumController: _contactNumberController),
+              CustomerAddressField(
+                  customerRepo: _custRepo,
+                  addressController: _addressController),
             ],
           ),
         ),
@@ -95,14 +112,17 @@ class _CustomerOrderingDetailsFormState
   }
 }
 
-class AddressField extends StatelessWidget {
-  const AddressField({
+class CustomerAddressField extends StatelessWidget {
+  const CustomerAddressField({
     Key? key,
     required TextEditingController addressController,
+    required CustomerRepo customerRepo,
   })  : _addressController = addressController,
+        _customerRepo = customerRepo,
         super(key: key);
 
   final TextEditingController _addressController;
+  final CustomerRepo _customerRepo;
 
   @override
   Widget build(BuildContext context) {
@@ -119,13 +139,28 @@ class AddressField extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'Delivery Address',
               prefixIcon: Icon(LineIcons.home),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  this._addressController.clear();
-                  context.read<OrderCustDetailsBloc>()
-                    ..add(ChangeAddress(_addressController));
-                },
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: state.address.valid
+                        ? () async {
+                            await _customerRepo.updateCustomer(
+                                customerId: int.parse(state.customerId.value),
+                                data: {"address": _addressController.text});
+                          }
+                        : null,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      this._addressController.clear();
+                      context.read<OrderCustDetailsBloc>()
+                        ..add(ChangeAddress(_addressController));
+                    },
+                  ),
+                ],
               ),
             ),
             onChanged: (value) {
@@ -144,10 +179,13 @@ class ContactNumberField extends StatelessWidget {
   const ContactNumberField({
     Key? key,
     required TextEditingController phoneNumController,
+    required CustomerRepo customerRepo,
   })  : _contactNumberController = phoneNumController,
+        _customerRepo = customerRepo,
         super(key: key);
 
   final TextEditingController _contactNumberController;
+  final CustomerRepo _customerRepo;
 
   @override
   Widget build(BuildContext context) {
@@ -160,13 +198,31 @@ class ContactNumberField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: 'Contact Number',
           prefixIcon: Icon(LineIcons.phone),
-          suffixIcon: IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              this._contactNumberController.clear();
-              context.read<OrderCustDetailsBloc>()
-                ..add(ChangeContactNumber(_contactNumberController));
-            },
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: state.contactNumber.valid
+                    ? () async {
+                        await _customerRepo.updateCustomer(
+                          customerId: int.parse(state.customerId.value),
+                          data: {
+                            "contact_number": _contactNumberController.text
+                          },
+                        );
+                      }
+                    : null,
+              ),
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  this._contactNumberController.clear();
+                  context.read<OrderCustDetailsBloc>()
+                    ..add(ChangeContactNumber(_contactNumberController));
+                },
+              ),
+            ],
           ),
         ),
         onChanged: (value) {
@@ -208,7 +264,7 @@ class CustomerTypeField extends StatelessWidget {
                   onTap: () {
                     _custTypeController.text = state.custTypes[index].name;
                     context.read<OrderCustDetailsBloc>()
-                      ..add(ChangeCustType(_custTypeController.text));
+                      ..add(ChangeCustType(_custTypeController));
                     context.read<CustomerBloc>()
                       ..add(
                           FilterCustomerByCustType(state.custTypes[index].id));
@@ -279,11 +335,11 @@ class CustomerNameTypeAheadField extends StatelessWidget {
     required TextEditingController custNameController,
     required TextEditingController contactNumberController,
     required TextEditingController addressController,
-    required CustomerRepo custRepo,
+    required CustomerRepo customerRepo,
   })  : _custCodeController = custNameController,
         _contactNumberController = contactNumberController,
         _addressController = addressController,
-        _custRepo = custRepo,
+        _custRepo = customerRepo,
         super(key: key);
 
   final TextEditingController _custCodeController;
@@ -318,7 +374,8 @@ class CustomerNameTypeAheadField extends StatelessWidget {
                   this._contactNumberController.clear();
                   this._addressController.clear();
                   context.read<OrderCustDetailsBloc>()
-                    ..add(ChangeCustCode(this._custCodeController.text));
+                    ..add(ChangeCustCode(
+                        customerId: null, custCode: _custCodeController));
                   context.read<OrderCustDetailsBloc>()
                     ..add(ChangeContactNumber(this._contactNumberController));
                   context.read<OrderCustDetailsBloc>()
@@ -340,19 +397,19 @@ class CustomerNameTypeAheadField extends StatelessWidget {
       },
       onSuggestionSelected: (dynamic selectedCustomer) {
         this._custCodeController.text = selectedCustomer.name;
+
         this._contactNumberController.text =
-            (selectedCustomer.contactNumber == null)
-                ? ''
-                : selectedCustomer.contactNumber;
-        this._addressController.text =
-            (selectedCustomer.address == null) ? '' : selectedCustomer.address;
+            selectedCustomer.contactNumber ?? '';
+
+        this._addressController.text = selectedCustomer.address ?? '';
 
         context.read<OrderCustDetailsBloc>()
-          ..add(ChangeCustCode(this._custCodeController.text));
+          ..add(ChangeCustCode(
+              customerId: selectedCustomer.id, custCode: _custCodeController));
         context.read<OrderCustDetailsBloc>()
-          ..add(ChangeContactNumber(this._contactNumberController));
+          ..add(ChangeContactNumber(_contactNumberController));
         context.read<OrderCustDetailsBloc>()
-          ..add(ChangeAddress(this._addressController));
+          ..add(ChangeAddress(_addressController));
       },
       validator: (_) {
         if (context.read<OrderCustDetailsBloc>().state.custCode.invalid) {

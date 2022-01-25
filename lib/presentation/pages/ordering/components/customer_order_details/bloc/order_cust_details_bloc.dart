@@ -16,7 +16,7 @@ class OrderCustDetailsBloc
 
   void onCustTypeChange(
       ChangeCustType event, Emitter<OrderCustDetailsState> emit) {
-    final custType = TextFieldModel.dirty(event.custType);
+    final custType = TextFieldModel.dirty(event.custType.text);
     emit(state.copyWith(
       custType: custType,
       status: Formz.validate([
@@ -26,22 +26,25 @@ class OrderCustDetailsBloc
         state.address,
       ]),
     ));
-    _checkOutRepo.checkoutData.custType = event.custType;
+    _checkOutRepo.checkoutData.custType = event.custType.text;
   }
 
   void onCustCodeChange(
       ChangeCustCode event, Emitter<OrderCustDetailsState> emit) {
-    final custCode = TextFieldModel.dirty(event.custCode);
+    final custCode = TextFieldModel.dirty(event.custCode.text);
+    final custId = TextFieldModel.dirty(event.customerId.toString());
     emit(state.copyWith(
       custCode: custCode,
+      customerId: custId,
       status: Formz.validate([
-        state.custType,
         custCode,
+        state.custType,
         state.contactNumber,
         state.address,
       ]),
     ));
-    _checkOutRepo.checkoutData.custCode = event.custCode;
+    _checkOutRepo.checkoutData.custCode = event.custCode.text;
+    _checkOutRepo.checkoutData.customerId = event.customerId;
   }
 
   void onContactNumChange(

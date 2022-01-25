@@ -1,5 +1,6 @@
 import 'package:delicious_ordering/common_bloc/app_init_bloc/app_init_bloc.dart';
 import 'package:delicious_ordering/common_bloc/app_init_bloc/app_init_state.dart';
+import 'package:delicious_ordering/configs/size_config.dart';
 import 'package:delicious_ordering/presentation/pages/login/components/login_form.dart';
 import 'package:delicious_ordering/presentation/pages/login/components/login_header.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
@@ -49,6 +50,8 @@ class Body extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.defaultSize),
                             decoration: BoxDecoration(
                               color: Colors.grey[100],
                               borderRadius:

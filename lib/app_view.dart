@@ -27,6 +27,7 @@ class _AppViewState extends State<AppView> {
 
   @override
   void dispose() {
+    print('dispose');
     CommonBloc.dispose();
     super.dispose();
   }
@@ -38,13 +39,16 @@ class _AppViewState extends State<AppView> {
       title: 'Delicious Ordering System',
       navigatorKey: _navigatorKey,
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.lightGreen,
         primaryColor: Color(0xff393e46),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             onPrimary: Color(0xFFFFF89A),
             primary: Color(0xFF1A5F7A),
           ),
+        ),
+        appBarTheme: AppBarTheme().copyWith(
+          backgroundColor: Colors.amber,
         ),
         iconTheme: IconThemeData(color: Color(0xFF876445)),
         textButtonTheme: TextButtonThemeData(
@@ -61,6 +65,9 @@ class _AppViewState extends State<AppView> {
               },
             ),
           ),
+        ),
+        dialogTheme: DialogTheme(
+          titleTextStyle: TextStyle(color: Colors.redAccent),
         ),
         textTheme: GoogleFonts.merriweatherTextTheme().copyWith(
           headline1: TextStyle(

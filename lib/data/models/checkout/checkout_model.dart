@@ -26,6 +26,9 @@ class CheckOutModel {
   @JsonKey(name: 'cust_type', toJson: toNull, includeIfNull: false)
   String? custType;
 
+  @JsonKey(name: 'customer_id', toJson: toNull, includeIfNull: false)
+  int? customerId;
+
   @JsonKey(name: 'payment_method')
   String? paymentMethod;
 

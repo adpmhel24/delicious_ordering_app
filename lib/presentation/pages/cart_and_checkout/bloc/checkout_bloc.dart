@@ -47,7 +47,6 @@ class CheckOutBloc extends Bloc<CheckOutEvent, CheckOutState> {
 
     emit(CheckOutState.submitting());
     try {
-      print(_checkOutRepo.checkoutData.toJson());
       String message =
           await _orderRepo.postNewOrder(_checkOutRepo.checkoutData.toJson());
       _cartRepo.clearCart();

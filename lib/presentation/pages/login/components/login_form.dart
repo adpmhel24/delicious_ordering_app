@@ -49,7 +49,9 @@ class _LoginFormState extends State<LoginForm> {
         }
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize * 3),
+        margin: EdgeInsets.symmetric(
+          horizontal: SizeConfig.defaultSize * 3,
+        ),
         padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.defaultPadding,
           vertical: SizeConfig.defaultSize * 4,

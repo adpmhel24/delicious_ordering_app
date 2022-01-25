@@ -8,7 +8,7 @@ abstract class OrderCustDetailsEvent extends Equatable {
 }
 
 class ChangeCustType extends OrderCustDetailsEvent {
-  final String custType;
+  final TextEditingController custType;
 
   ChangeCustType(this.custType);
 
@@ -17,9 +17,10 @@ class ChangeCustType extends OrderCustDetailsEvent {
 }
 
 class ChangeCustCode extends OrderCustDetailsEvent {
-  final String custCode;
+  final TextEditingController custCode;
+  final int? customerId;
 
-  ChangeCustCode(this.custCode);
+  ChangeCustCode({this.customerId, required this.custCode});
   @override
   List<Object> get props => [custCode];
 }
