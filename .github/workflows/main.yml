@@ -31,7 +31,7 @@ jobs:
             endpoint: http://122.54.198.84:82/api/f_e/version/add_update
             # The bearer token here is returned from the TOKEN_ENDPOINT call. The returned data looks like so: {data: {access_token: '123'}}, meaning it can be accessed using the triple bracket syntax.
 #             configuration: '{ "method": "POST", "headers": {"Authorization": "Bearer {{{ data.token }}}"}, "body": {"platform": "android", "version": "1.0.0+1", "data": {{{data}}} }
-            configuration: '{ "method": "POST", "body": {"platform": "android", "version": "1.0.0+1", "wew": {{{ access_token }}} } }'
+            configuration: '{ "method": "POST", "headers": {"Authorization": "Bearer {{{ data.access_token }}}"} }'
             
     # Setup Java environment in order to build the Android app.
     # - uses: actions/checkout@v2
