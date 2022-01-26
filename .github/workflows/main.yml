@@ -28,7 +28,7 @@ jobs:
             token-endpoint: http://122.54.198.84:82/api/auth/get_token
             token-configuration: '{ "method": "POST", "body": {"username": "admin", "password": "10011992"} }'
             # Once the token endpoint has fetched then this endpoint is requested.
-            endpoint: http://122.54.198.84:82/data/api/f_e/version/add_update
+            endpoint: http://122.54.198.84:82/api/f_e/version/add_update
             # The bearer token here is returned from the TOKEN_ENDPOINT call. The returned data looks like so: {data: {access_token: '123'}}, meaning it can be accessed using the triple bracket syntax.
             configuration: '{ "method": "POST", "headers": {"Authorization": "Bearer {{{ data.token }}}"}, "body": {"platform": "android", "version": "1.0.0+1"} }'
 
