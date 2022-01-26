@@ -27,8 +27,8 @@ jobs:
     with: 
       token-endpoint: http://122.54.198.84:82/api/auth/login?username=admin&password=10011992
       token-configuration: '{ "method": "GET" }'
-      run: |
-          echo "data: $data"
+      # run: |
+      #     echo "data: $data"
     
     # # Setup Java environment in order to build the Android app.
     # - uses: actions/checkout@v2
