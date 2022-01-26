@@ -23,10 +23,10 @@ jobs:
     steps:
 
     # Login to API
-      uses: JamesIves/fetch-api-data-action@v2.1.0
-      with: 
-        token-endpoint: http://122.54.198.84:82/api/auth/login?password=10011992&username=admin
-        token-configuration: '{ "method": "GET" }'
+      - uses: JamesIves/fetch-api-data-action@v2.1.0
+        with: 
+          token-endpoint: http://122.54.198.84:82/api/auth/login?password=10011992&username=admin
+          token-configuration: '{ "method": "GET" }'
     
     # Setup Java environment in order to build the Android app.
     # - uses: actions/checkout@v2
