@@ -146,9 +146,30 @@ class CustomerAddressField extends StatelessWidget {
                     icon: Icon(Icons.add),
                     onPressed: state.address.valid
                         ? () async {
-                            await _customerRepo.updateCustomer(
-                                customerId: int.parse(state.customerId.value),
-                                data: {"address": _addressController.text});
+                            try {
+                              String message = await _customerRepo
+                                  .updateCustomer(
+                                      customerId:
+                                          int.parse(state.customerId.value),
+                                      data: {
+                                    "address": _addressController.text
+                                  });
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(
+                                  SnackBar(
+                                    content: Text(message),
+                                  ),
+                                );
+                            } on Exception catch (e) {
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(
+                                  SnackBar(
+                                    content: Text(e.toString()),
+                                  ),
+                                );
+                            }
                           }
                         : null,
                   ),
@@ -205,12 +226,29 @@ class ContactNumberField extends StatelessWidget {
                 icon: Icon(Icons.add),
                 onPressed: state.contactNumber.valid
                     ? () async {
-                        await _customerRepo.updateCustomer(
-                          customerId: int.parse(state.customerId.value),
-                          data: {
-                            "contact_number": _contactNumberController.text
-                          },
-                        );
+                        try {
+                          String message = await _customerRepo.updateCustomer(
+                            customerId: int.parse(state.customerId.value),
+                            data: {
+                              "contact_number": _contactNumberController.text
+                            },
+                          );
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              SnackBar(
+                                content: Text(message),
+                              ),
+                            );
+                        } on Exception catch (e) {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              SnackBar(
+                                content: Text(e.toString()),
+                              ),
+                            );
+                        }
                       }
                     : null,
               ),
