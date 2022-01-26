@@ -33,6 +33,7 @@ jobs:
             # The configuration contains secrets held in the Settings/Secrets menu of the repository.
             token-configuration: '{ "method": "POST", "body": {"username": "admin", "password": "10011992"} }'
             # Once the token endpoint has fetched then this endpoint is requested.
+            run: "echo:: {{{ data.token}}}"
             endpoint: https://example.com/data
             # The bearer token here is returned from the TOKEN_ENDPOINT call. The returned data looks like so: {data: {access_token: '123'}}, meaning it can be accessed using the triple bracket syntax.
             configuration: '{ "method": "GET", "headers": {"Authorization": "Bearer {{{ data.access_token }}}"} }'
