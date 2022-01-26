@@ -24,10 +24,19 @@ jobs:
 
     # Login to API
       - uses: JamesIves/fetch-api-data-action@v2.1.0
-        with: 
-          token-endpoint: http://122.54.198.84:82/api/auth/get_token
-          token-configuration: '{ "method": "POST", "body": {"username": "admin", "password": "10011992"} }'
-    
+      #   with: 
+      #     token-endpoint: http://122.54.198.84:82/api/auth/get_token
+      #     token-configuration: '{ "method": "POST", "body": {"username": "admin", "password": "10011992"} }'
+        with:
+            # The token endpoint is requested first. This retrieves the access token for the other endpoint.
+            token-endpoint: https://example.com/auth/token
+            # The configuration contains secrets held in the Settings/Secrets menu of the repository.
+            token-configuration: '{ "method": "POST", "body": {"client_id": "${{ secrets.client_id }}", "client_secret": "${{ secrets.client_secret }}"} }'
+            # Once the token endpoint has fetched then this endpoint is requested.
+            endpoint: https://example.com/data
+            # The bearer token here is returned from the TOKEN_ENDPOINT call. The returned data looks like so: {data: {access_token: '123'}}, meaning it can be accessed using the triple bracket syntax.
+            configuration: '{ "method": "GET", "headers": {"Authorization": "Bearer {{{ data.access_token }}}"} }'
+
     # Setup Java environment in order to build the Android app.
     # - uses: actions/checkout@v2
     # - uses: actions/setup-java@v1
