@@ -1,5 +1,5 @@
 import 'package:delicious_ordering/data/repositories/repositories.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/customer_order_details/bloc/bloc.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/customer_order_details/bloc/bloc.dart';
 import 'package:delicious_ordering/presentation/widgets/text_field_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';

@@ -1,6 +1,6 @@
 import 'package:delicious_ordering/data/models/products/product.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/bloc/bloc.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/select_item_form.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/bloc/bloc.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/select_item_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

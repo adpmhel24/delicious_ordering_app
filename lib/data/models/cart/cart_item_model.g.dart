@@ -15,6 +15,7 @@ CartItem _$CartItemFromJson(Map<String, dynamic> json) => CartItem(
       uom: json['uom'] as String,
       discAmount: (json['disc_amount'] as num?)?.toDouble() ?? 0.00,
       discprcnt: (json['discprcnt'] as num?)?.toDouble() ?? 0.00,
+      isSelected: json['isSelected'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$CartItemToJson(CartItem instance) {
@@ -34,5 +35,6 @@ Map<String, dynamic> _$CartItemToJson(CartItem instance) {
   val['disc_amount'] = instance.discAmount;
   val['discprcnt'] = instance.discprcnt;
   val['uom'] = instance.uom;
+  writeNotNull('isSelected', CartItem.toNull(instance.isSelected));
   return val;
 }

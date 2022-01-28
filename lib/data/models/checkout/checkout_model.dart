@@ -47,6 +47,7 @@ class CheckOutModel {
     this.remarks,
     this.rows,
     this.contactNumber,
+    this.customerId = -1,
   });
 
   factory CheckOutModel.fromJson(Map<String, dynamic> json) =>

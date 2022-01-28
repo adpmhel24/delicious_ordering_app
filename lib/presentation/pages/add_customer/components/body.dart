@@ -3,7 +3,7 @@ import 'package:delicious_ordering/data/repositories/repositories.dart';
 import 'package:delicious_ordering/presentation/pages/add_customer/bloc/add_customer_bloc.dart';
 import 'package:delicious_ordering/presentation/pages/add_customer/bloc/add_customer_event.dart';
 import 'package:delicious_ordering/presentation/pages/add_customer/bloc/add_customer_state.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/ordering_home.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/ordering_home.dart';
 import 'package:delicious_ordering/presentation/widgets/custom_choices_modal.dart';
 import 'package:delicious_ordering/presentation/widgets/custom_error_dialog.dart';
 import 'package:delicious_ordering/presentation/widgets/custom_loading_dialog.dart';

@@ -1,8 +1,9 @@
 import 'package:delicious_ordering/common_bloc/auth_bloc/bloc.dart';
 import 'package:delicious_ordering/data/repositories/repositories.dart';
 import 'package:delicious_ordering/presentation/pages/login/login.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/ordering_home.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/ordering_home.dart';
 import 'package:delicious_ordering/presentation/pages/orders/orders.dart';
+import 'package:delicious_ordering/presentation/pages/orders_for_dispo/orders_for_dispo.dart';
 import 'package:delicious_ordering/utils/navigation_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,13 @@ class _AppDrawerState extends State<AppDrawer> {
             text: 'My Orders',
             onTap: () {
               Go.popAndPushNamed(context, OrdersPage.routeName);
+            },
+          ),
+          _createDrawerItem(
+            icon: Icons.list_alt_rounded,
+            text: 'Orders For Dispo',
+            onTap: () {
+              Go.popAndPushNamed(context, OrdersForDispo.routeName);
             },
           ),
           // _createDrawerItem(

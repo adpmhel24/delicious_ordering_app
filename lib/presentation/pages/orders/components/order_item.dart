@@ -25,7 +25,7 @@ class _OrderItemState extends State<OrderItem> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
       height: _expanded
-          ? min((20 * 20) + (widget.order.rows.length) * 39, 800)
+          ? min((20 * 20) + (widget.order.rows!.length) * 39, 800)
           : 200,
       child: Card(
         margin: EdgeInsets.all(10),
@@ -118,7 +118,7 @@ class _OrderItemState extends State<OrderItem> {
               duration: Duration(milliseconds: 300),
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
               height: _expanded
-                  ? min((7 * 20) + (widget.order.rows.length) * 39, 700)
+                  ? min((7 * 20) + (widget.order.rows!.length) * 39, 700)
                   : 0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +130,7 @@ class _OrderItemState extends State<OrderItem> {
                       physics: NeverScrollableScrollPhysics(),
                       children: [
                         Divider(thickness: 1),
-                        ...widget.order.rows
+                        ...widget.order.rows!
                             .map(
                               (prod) => Row(
                                 // mainAxisAlignment:

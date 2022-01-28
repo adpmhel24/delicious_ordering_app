@@ -17,6 +17,13 @@ class LoginAPI {
 
     try {
       response = await dio.get('/api/auth/login',
+          options: Options(headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Headers":
+                "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+            "Access-Control-Allow-Methods": "POST, OPTIONS, GET"
+          }),
           queryParameters: {'username': username, 'password': password});
     } on DioError catch (e) {
       throw Exception(e.response!.data['message']);

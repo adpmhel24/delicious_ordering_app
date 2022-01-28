@@ -23,8 +23,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       address: json['address'] as String?,
       disctype: json['disctype'] as String?,
       discprcnt: (json['discprcnt'] as num?)?.toDouble(),
-      rows: (json['rows'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
+      rows: (json['rows'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
           .toList(),
     );
 

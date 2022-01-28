@@ -8,16 +8,35 @@ class SizeConfig {
 
   static double get defaultPadding => defaultSize * 1.5;
 
+  getDefaultFontSized(dynamic value) {
+    if (screenWidth <= 650) {
+      return ((value / 650) * screenHeight) < 10.0
+          ? 10.0
+          : (value / 650) * screenHeight;
+    } else if (screenWidth > 650 && screenWidth < 1100) {
+      return ((value / 1100) * screenHeight) < 10.0
+          ? 10.0
+          : (value / 1100) * screenHeight;
+    } else if (screenWidth >= 1100) {
+      return ((value / 1500) * screenHeight) < 10.0
+          ? 10.0
+          : (value / 1500) * screenHeight;
+    }
+  }
+
   void init(BoxConstraints constraints, Orientation orientation) {
     screenWidth = constraints.maxWidth;
     screenHeight = constraints.maxHeight;
-    //Apple iPhone 11 viewport size is 414 x 896 (px)
-    //With iPhone 11, i set defaultSize = 10;
-    //So if the screen increase or decrease then our defaultSize also vary
-    if (orientation == Orientation.portrait) {
-      defaultSize = screenHeight * 10 / 896;
-    } else {
-      defaultSize = screenHeight * 10 / 414;
+    // Desktop Width Size >=1100
+    // Mobile Width Size <=650
+    // Table Width Size >650 & <1100
+
+    if (screenWidth <= 650) {
+      defaultSize = screenHeight * 10 / 750;
+    } else if (screenWidth > 650 && screenWidth < 1100) {
+      defaultSize = screenHeight * 10 / 800;
+    } else if (screenWidth >= 1100) {
+      defaultSize = screenHeight * 10 / 900;
     }
   }
 

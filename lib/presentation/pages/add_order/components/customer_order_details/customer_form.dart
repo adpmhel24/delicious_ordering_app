@@ -4,7 +4,7 @@ import 'package:delicious_ordering/common_bloc/cust_type_bloc/cust_type_state.da
 import 'package:delicious_ordering/common_bloc/customer_bloc/bloc.dart';
 import 'package:delicious_ordering/configs/size_config.dart';
 import 'package:delicious_ordering/data/repositories/repositories.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/customer_order_details/bloc/bloc.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/customer_order_details/bloc/bloc.dart';
 import 'package:delicious_ordering/presentation/widgets/custom_choices_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

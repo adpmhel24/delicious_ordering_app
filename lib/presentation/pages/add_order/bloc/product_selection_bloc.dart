@@ -92,7 +92,7 @@ class ProductSelectionBloc
     Emitter<ProductSelectionState> emit,
   ) async {
     try {
-      await _cartRepo.deleteFromCart(event.cartItem);
+      _cartRepo.deleteFromCart(event.cartItem);
       emit(state.copyWith(isUndo: true));
     } on Exception catch (e) {
       emit(state.copyWith(message: e.toString()));

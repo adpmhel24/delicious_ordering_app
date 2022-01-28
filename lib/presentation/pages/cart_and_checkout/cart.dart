@@ -1,6 +1,6 @@
 import 'package:delicious_ordering/common_bloc/cart_bloc/bloc.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/customer_order_details/bloc/bloc.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/ordering_home.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/customer_order_details/bloc/bloc.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/ordering_home.dart';
 import 'package:delicious_ordering/presentation/widgets/custom_warning_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -33,17 +33,14 @@ class CartPage extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'My Cart',
-            style: Theme.of(context).textTheme.headline2,
-          ),
+          title: Text('My Cart'),
           actions: [
             IconButton(
               color: Theme.of(context).iconTheme.color,
               onPressed: () {
                 customWarningDialog(
                   context: context,
-                  message: 'Are you sure you want to remove all?',
+                  message: 'Are you sure you want to the remove all items?',
                   onPositiveClick: () {
                     context.read<CartBloc>().add(ClearCart());
                     Navigator.of(context).pop();

@@ -11,6 +11,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<UpdateDiscount>(onUpdateDiscount);
     on<UpdateDeliveryFee>(onUpdateDelfee);
     on<UpdateTenderedAmount>(onUpdateTenderedAmnt);
+
+    // on<ToggleIsSelectedCartItem>(onToggleSelectedItem);
+    // on<ToggleSelectAllCartItem>(onToggleSelectAllItem);
+    // on<RemoveItemIfSelected>(onRemoveItemIfSelected);
   }
 
   void onLoadCart(LoadCart event, Emitter<CartState> emit) {
@@ -32,10 +36,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     emit(EmptyCart());
   }
 
-  void onRemoveFromCart(
-      RemoveItemFromCart event, Emitter<CartState> emit) async {
+  // void onRemoveItemIfSelected(
+  //     RemoveItemIfSelected event, Emitter<CartState> emit) {
+  //   emit(CartLoading());
+  //   _cartRepo.removeItemIfSelected();
+  //   if (_cartRepo.cartItems.isEmpty) {
+  //     emit(EmptyCart());
+  //   }
+  //   emit(CartLoaded(_cartRepo.cartItems));
+  // }
+
+  void onRemoveFromCart(RemoveItemFromCart event, Emitter<CartState> emit) {
     emit(CartLoading());
-    await _cartRepo.deleteFromCart(event.cartItem);
+    _cartRepo.deleteFromCart(event.cartItem);
     emit(CartLoaded(_cartRepo.cartItems));
   }
 
@@ -56,4 +69,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     _cartRepo.changeTenderedAmnt(event.tenderedAmount);
     emit(CartUpdateTenderedAmountState(_cartRepo.tenderedAmnt.toString()));
   }
+
+  // void onToggleSelectedItem(
+  //     ToggleIsSelectedCartItem event, Emitter<CartState> emit) {
+  //   emit(CartLoading());
+  //   _cartRepo.toggleIsSelected(event.index);
+  //   emit(CartLoaded(_cartRepo.cartItems));
+  // }
+
+  // void onToggleSelectAllItem(
+  //     ToggleSelectAllCartItem event, Emitter<CartState> emit) {
+  //   emit(CartLoading());
+  //   _cartRepo.toggleSelectAllItems();
+  //   emit(CartLoaded(_cartRepo.cartItems));
+  // }
 }

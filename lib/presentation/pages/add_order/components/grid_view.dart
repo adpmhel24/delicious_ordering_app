@@ -1,5 +1,5 @@
 import 'package:delicious_ordering/configs/size_config.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/product_card.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/product_card.dart';
 import 'package:flutter/material.dart';
 
 import '/data/models/products/product.dart';

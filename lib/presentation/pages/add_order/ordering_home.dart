@@ -1,11 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:delicious_ordering/common_bloc/cart_bloc/bloc.dart';
 import 'package:delicious_ordering/common_bloc/products_bloc/bloc.dart';
+import 'package:delicious_ordering/configs/size_config.dart';
 import 'package:delicious_ordering/data/repositories/repositories.dart';
 import 'package:delicious_ordering/presentation/pages/add_customer/new_customer.dart';
 import 'package:delicious_ordering/presentation/pages/cart_and_checkout/cart.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/customer_order_details/bloc/bloc.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/components/customer_order_details/customer_form.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/customer_order_details/bloc/bloc.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/components/customer_order_details/customer_form.dart';
 import 'package:delicious_ordering/presentation/widgets/app_drawer.dart';
 import 'package:delicious_ordering/utils/navigation_handler.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
@@ -71,7 +72,6 @@ class _OrderingHomePageState extends State<OrderingHomePage> {
         appBar: AppBar(
           title: Text(
             'Ordering',
-            style: Theme.of(context).textTheme.headline2,
           ),
           actions: [
             Builder(builder: (context) {

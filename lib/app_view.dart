@@ -4,6 +4,7 @@ import 'package:delicious_ordering/common_bloc/cust_type_bloc/cust_type_event.da
 import 'package:delicious_ordering/common_bloc/customer_bloc/bloc.dart';
 import 'package:delicious_ordering/common_bloc/products_bloc/bloc.dart';
 import 'package:delicious_ordering/configs/size_config.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/ordering_home.dart';
 import 'package:delicious_ordering/presentation/pages/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'common_bloc/common_bloc.dart';
 import 'common_bloc/auth_bloc/auth_bloc.dart';
 import 'common_bloc/auth_bloc/auth_state.dart';
-import 'presentation/pages/ordering/ordering_home.dart';
 
 class AppView extends StatefulWidget {
   const AppView({Key? key}) : super(key: key);
@@ -27,7 +27,6 @@ class _AppViewState extends State<AppView> {
 
   @override
   void dispose() {
-    print('dispose');
     CommonBloc.dispose();
     super.dispose();
   }
@@ -49,6 +48,14 @@ class _AppViewState extends State<AppView> {
         ),
         appBarTheme: AppBarTheme().copyWith(
           backgroundColor: Colors.amber,
+          titleTextStyle: TextStyle(
+            fontSize: SizeConfig().getDefaultFontSized(15.0),
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFB3541E),
+            fontStyle: FontStyle.italic,
+            fontFamily: GoogleFonts.merriweather().fontFamily,
+            letterSpacing: 1.0,
+          ),
         ),
         iconTheme: IconThemeData(color: Color(0xFF876445)),
         textButtonTheme: TextButtonThemeData(
@@ -76,7 +83,7 @@ class _AppViewState extends State<AppView> {
             fontFamily: GoogleFonts.merriweather().fontFamily,
           ),
           headline2: TextStyle(
-            fontSize: SizeConfig.defaultSize * 2,
+            fontSize: SizeConfig().getDefaultFontSized(15.0),
             fontWeight: FontWeight.bold,
             color: Color(0xFFB3541E),
             fontStyle: FontStyle.italic,
@@ -84,29 +91,35 @@ class _AppViewState extends State<AppView> {
             letterSpacing: 1.0,
           ),
           headline3: TextStyle(
-            fontSize: SizeConfig.defaultSize * 1.2,
+            fontSize: SizeConfig().getDefaultFontSized(10.0),
+            fontWeight: FontWeight.bold,
+            fontFamily: GoogleFonts.merriweather().fontFamily,
+            letterSpacing: 1.0,
+          ),
+          headline4: TextStyle(
+            fontSize: SizeConfig().getDefaultFontSized(10.0),
             fontWeight: FontWeight.bold,
             fontFamily: GoogleFonts.merriweather().fontFamily,
             letterSpacing: 1.0,
           ),
           subtitle1: TextStyle(
-            fontSize: SizeConfig.defaultSize * 1.5,
+            fontSize: SizeConfig().getDefaultFontSized(10.0),
             fontWeight: FontWeight.bold,
             fontFamily: GoogleFonts.merriweather().fontFamily,
             letterSpacing: 1.0,
           ),
           subtitle2: TextStyle(
-            fontSize: SizeConfig.defaultSize,
+            fontSize: SizeConfig().getDefaultFontSized(10.0),
             fontWeight: FontWeight.w400,
             fontFamily: GoogleFonts.merriweather().fontFamily,
             letterSpacing: 1.0,
           ),
           bodyText1: TextStyle(
-            fontSize: SizeConfig.defaultSize * 1.5,
+            fontSize: SizeConfig().getDefaultFontSized(10.0),
             fontFamily: GoogleFonts.merriweather().fontFamily,
           ),
           bodyText2: TextStyle(
-            fontSize: SizeConfig.defaultSize * 1.2,
+            fontSize: SizeConfig().getDefaultFontSized(10),
             fontFamily: GoogleFonts.merriweather().fontFamily,
           ),
         ),

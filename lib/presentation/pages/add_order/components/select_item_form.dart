@@ -1,5 +1,5 @@
 import 'package:delicious_ordering/data/models/models.dart';
-import 'package:delicious_ordering/presentation/pages/ordering/bloc/bloc.dart';
+import 'package:delicious_ordering/presentation/pages/add_order/bloc/bloc.dart';
 import 'package:delicious_ordering/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

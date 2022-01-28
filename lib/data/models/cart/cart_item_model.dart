@@ -25,6 +25,9 @@ class CartItem {
 
   String uom;
 
+  @JsonKey(toJson: toNull, includeIfNull: false)
+  bool isSelected;
+
   CartItem({
     required this.id,
     required this.itemCode,
@@ -34,6 +37,7 @@ class CartItem {
     required this.uom,
     this.discAmount = 0.00,
     this.discprcnt = 0.00,
+    this.isSelected = false,
   });
 
   factory CartItem.fromJson(Map<String, dynamic> json) =>

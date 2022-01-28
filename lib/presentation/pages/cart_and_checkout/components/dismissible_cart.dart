@@ -1,5 +1,4 @@
-import 'package:delicious_ordering/common_bloc/cart_bloc/cart_bloc.dart';
-import 'package:delicious_ordering/common_bloc/cart_bloc/cart_event.dart';
+import 'package:delicious_ordering/common_bloc/cart_bloc/bloc.dart';
 import 'package:delicious_ordering/configs/size_config.dart';
 import 'package:delicious_ordering/data/models/cart/cart_item_model.dart';
 import 'package:delicious_ordering/utils/currency_formatter.dart';

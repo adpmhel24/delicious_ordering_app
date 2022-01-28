@@ -8,8 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import './add_ons_button.dart';
 import './form.dart';
-
-import 'cart_list_view.dart';
+import './cart_list_view.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -184,41 +183,50 @@ class HeaderWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            margin: EdgeInsets.only(right: deviceInfo.size.width * .02),
+          Expanded(
+              child: Container(
+            // margin: EdgeInsets.only(right: deviceInfo.size.width * .02),
             child: SizedBox(
-                width: deviceInfo.size.width * .350,
-                child: Text(
-                  'Product',
-                  textAlign: TextAlign.center,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: deviceInfo.size.width * .02),
+              // width: deviceInfo.size.width * .350,
+              child: Text(
+                'Product',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )),
+          Expanded(
+              child: Container(
+            // margin: EdgeInsets.only(right: deviceInfo.size.width * .02),
             child: SizedBox(
-                width: deviceInfo.size.width * .15,
-                child: Text(
-                  'Quantity',
-                  textAlign: TextAlign.center,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.only(right: deviceInfo.size.width * .02),
+              // width: deviceInfo.size.width * .15,
+              child: Text(
+                'Quantity',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )),
+          Expanded(
+              child: Container(
+            // margin: EdgeInsets.only(right: deviceInfo.size.width * .02),
             child: SizedBox(
-                width: deviceInfo.size.width * .15,
-                child: Text(
-                  'Price',
-                  textAlign: TextAlign.center,
-                )),
-          ),
-          Container(
-            child: SizedBox(
-                width: deviceInfo.size.width * .15,
+              // width: deviceInfo.size.width * .15,
+              child: Text(
+                'Price',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )),
+          Expanded(
+            child: Container(
+              child: SizedBox(
+                // width: deviceInfo.size.width * .15,
                 child: Text(
                   'Subtotal',
                   textAlign: TextAlign.center,
-                )),
-          ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

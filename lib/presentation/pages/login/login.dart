@@ -15,6 +15,7 @@ class LoginPage extends StatelessWidget {
   }
 
   const LoginPage({Key? key}) : super(key: key);
+  // final Function(bool loggedIn) onLoginCallback;
 
   // @override
   // Widget build(BuildContext context) {

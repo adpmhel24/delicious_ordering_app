@@ -1,4 +1,4 @@
-import 'package:delicious_ordering/data/models/cart/cart_item_model.dart';
+import 'package:delicious_ordering/data/models/models.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class CartEvent extends Equatable {
@@ -20,6 +20,8 @@ class RemoveItemFromCart extends CartEvent {
   @override
   List<Object?> get props => [cartItem];
 }
+
+// class RemoveItemIfSelected extends CartEvent {}
 
 class UpdateItemInCart extends CartEvent {}
 
@@ -47,3 +49,14 @@ class UpdateTenderedAmount extends CartEvent {
   @override
   List<Object?> get props => [tenderedAmount];
 }
+
+// class ToggleIsSelectedCartItem extends CartEvent {
+//   final int index;
+
+//   ToggleIsSelectedCartItem(this.index);
+
+//   @override
+//   List<Object> get props => [index];
+// }
+
+// class ToggleSelectAllCartItem extends CartEvent {}

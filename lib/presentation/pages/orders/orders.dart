@@ -52,7 +52,6 @@ class _OrdersPageState extends State<OrdersPage> {
       appBar: AppBar(
         title: Text(
           appBarTitles[_selectedIndex],
-          style: Theme.of(context).textTheme.headline2,
         ),
       ),
       body: DoubleBackToCloseApp(

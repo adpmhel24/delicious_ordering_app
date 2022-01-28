@@ -31,7 +31,7 @@ class OrderModel {
   String? disctype;
   double? discprcnt;
 
-  List<Map<String, dynamic>> rows;
+  List<Map<String, dynamic>>? rows;
 
   OrderModel(
       {this.id,

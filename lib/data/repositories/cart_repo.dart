@@ -57,6 +57,18 @@ class CartRepo {
     _checkOutRepo.checkoutData.delfee = delfee;
   }
 
+  void toggleIsSelected(int index) {
+    _cartItems[index].isSelected = !_cartItems[index].isSelected;
+  }
+
+  void toggleSelectAllItems() {
+    _cartItems = _cartItems.map((cartItem) {
+      var item = cartItem;
+      item.isSelected = !item.isSelected;
+      return item;
+    }).toList();
+  }
+
   double get grantTotal {
     // double totalAmount = 0;
     // _cartItems.forEach((e) => totalAmount += e.total);
@@ -66,18 +78,26 @@ class CartRepo {
   int get cartItemsCount => _cartItems.length;
 
   // Delete Item From The Cart
-  Future<void> deleteFromCart(CartItem cartItem) async {
-    await Future.delayed(const Duration(milliseconds: 300));
+  void deleteFromCart(CartItem cartItem) {
     int index = _cartItems.indexWhere(
         (e) => e.id == cartItem.id && e.unitPrice == cartItem.unitPrice);
     _cartItems.removeAt(index);
+  }
+
+  void removeItemIfSelected() {
+    _cartItems.removeWhere((cartItem) => cartItem.isSelected);
+    if (_cartItems.isEmpty) {
+      _cartItems.clear();
+      _delfee = 0;
+      _tenderedAmnt = 0;
+      _checkOutRepo.checkoutData = CheckOutModel();
+    }
   }
 
   // Clear Cart
   Future<void> clearCart() async {
     await Future.delayed(const Duration(milliseconds: 300));
     _cartItems.clear();
-    _discount = 0;
     _delfee = 0;
     _tenderedAmnt = 0;
     _checkOutRepo.checkoutData = CheckOutModel();

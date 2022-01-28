@@ -5,9 +5,18 @@ import 'package:delicious_ordering/data/models/auth_user/user_model.dart';
 import 'package:delicious_ordering/data/services/apis.dart';
 import 'package:dio/dio.dart';
 
-class AuthRepository {
+import 'package:flutter/material.dart';
+
+class AuthRepository extends ChangeNotifier {
   LoginAPI _loginAPI = LoginAPI();
   UserModel? _currentUser;
+  bool _authenticated = false;
+  bool get authenticated => _authenticated;
+
+  set authenticated(bool value) {
+    _authenticated = value;
+    notifyListeners();
+  }
 
   UserModel get currentUser => _currentUser!;
 
@@ -21,6 +30,10 @@ class AuthRepository {
         _currentUser = UserModel.fromJson(response.data['data']);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString("userData", json.encode(_currentUser!.toJson()));
+
+        // Change the value of authenticated then notify
+        _authenticated = true;
+        notifyListeners();
       } else {
         throw Exception(response.data['message']);
       }
@@ -36,6 +49,10 @@ class AuthRepository {
     await Future.delayed(const Duration(milliseconds: 500));
     prefs.remove("userData");
     _currentUser = null;
+
+    // Change the value of authenticated then notify
+    _authenticated = false;
+    notifyListeners();
   }
 
   ///Singleton factory
